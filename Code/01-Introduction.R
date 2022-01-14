@@ -131,7 +131,7 @@ write.csv(b, file = "favoriteData.csv")
 # Packages -------------------------------------------------------
 
 
-install.packages("ISLR")
-library(ISLR)
+install.packages("ISLR2")
+library(ISLR2)
 
 
