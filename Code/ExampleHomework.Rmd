@@ -1,0 +1,41 @@
+---
+title: "Homework ???"
+author: "Your Name Here"
+date: "Month Day, 2020"
+output: html_document
+---
+
+### Question 1
+Chapter 2 Exercise 7
+
+a. 
+```{r}
+x <- matrix(c(0, 2, 0, 0, -1, 1, 0,
+              3, 0, 1, 1, 0, 1, 0,
+              0, 0, 3, 2, 1, 1, 0),
+            nrow = 7, ncol = 3)
+
+dist(x)
+```
+
+b. Green, since observation 5 is closest to our test point and it has a Y value of Green.
+
+c. Red, observations 2, 5, and 6 are closest to our test point and their Y values are Red, Green, and Red, respectively.
+
+d. You should think about this one.
+
+### Question 2 
+Chapter ? Exercise ?
+
+a. Here is another answer with some code.
+```{r}
+y <- c(3,6,23,7)
+mean(y)
+```
+b. Repeating the same thing but showing the output only (no code).
+```{r, echo = FALSE}
+y <- c(3,6,23,7)
+mean(y)
+```
+
+c. (Optional/advanced) Can show how the sample mean is calcualted using $\LaTeX: \bar{y} =\frac{\sum{y}}{n}$
