@@ -59,7 +59,7 @@ fit4
 
 pred4 <- predict(fit4, leukemia)
 table(pred4, leukemia$tumor)
-mean(pred3$class == leukemia$tumor) # same as QDA
+mean(pred4 == leukemia$tumor) # same as LDA
 
 predict(fit4, leukemia, type = "raw")
 
