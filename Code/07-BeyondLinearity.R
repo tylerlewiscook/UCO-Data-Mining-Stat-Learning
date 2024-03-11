@@ -72,7 +72,7 @@ cvfit2loocv$delta[1]
 
 plot(airquality$Temp, airquality$Ozone)
 
-locfit1 <- loess(airquality$Ozone ~ airquality$Temp, span = 1)
+locfit1 <- loess(airquality$Ozone ~ airquality$Temp, span = 0.75)
 predloc1 <- predict(locfit1)
 locdat1 <- data.frame(Temp = airquality$Temp, predloc1)
 locdat1 <- locdat1[order(locdat1$Temp), ]
