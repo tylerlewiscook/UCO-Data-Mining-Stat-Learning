@@ -40,7 +40,6 @@ summary(fit3)
 #Predictions
 newwine <- data.frame(volatile.acidity = 0.8, alcohol = 10, pH = 3.65)
 predict(fit3, newwine)
-predict(fit3, newwine, interval = "confidence")
 predict(fit3, newwine, interval = "prediction")
 
 
@@ -61,13 +60,6 @@ summary(fit5v2)
 
 fit5v3 <- lm(quality ~ poly(alcohol, 2, raw = TRUE), data = wine)
 summary(fit5v3)
-
-fit.car2 <- lm(dist ~ speed + I(speed^2), data = cars)
-new.speed <- data.frame(speed = c(seq(min(cars$speed), max(cars$speed), 0.1)))
-preds <- predict(fit.car2, new.speed)
-plot(cars$speed, cars$dist)
-abline(fit.car)
-lines(new.speed$speed, preds, col = "blue")
 
 
 #Qualitative predictors
