@@ -21,7 +21,8 @@ par(mfrow = c(1,1))
 
 
 # Multiple linear
-wine <- read.csv(file = "wine.csv")   #Check your file path
+wine <- read.csv(file = "wine.csv")   #Check your file path or load from Github
+# wine <- read.csv("https://raw.githubusercontent.com/tylerlewiscook/UCO-Data-Mining-Stat-Learning/refs/heads/main/Data/wine.csv")
 
 plot(wine)
 head(wine)
@@ -51,7 +52,7 @@ fit4v2 <- lm(quality ~ alcohol + pH*volatile.acidity, data = wine)
 summary(fit4v2)
 
 
-#Nonlinear terms
+#Polynomial terms
 fit5 <- lm(quality ~ alcohol + I(alcohol^2), data = wine)
 summary(fit5)
 
