@@ -1,6 +1,7 @@
 # Chapter 4 Code
 
 leukemia <- read.csv(file = "leukemia.csv", stringsAsFactors = TRUE)
+# leukemia <- read.csv(file = "https://raw.githubusercontent.com/tylerlewiscook/UCO-Data-Mining-Stat-Learning/refs/heads/main/Data/leukemia.csv", stringsAsFactors = TRUE)
 
 # Logistic regression ----------------------------------------------------------
 
