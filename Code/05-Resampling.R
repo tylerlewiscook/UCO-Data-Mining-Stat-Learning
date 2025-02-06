@@ -70,3 +70,51 @@ mean(bstrap)
 sd(bstrap)
 
 # Note: more functionality in 'boot' package
+
+
+
+# Additional CV examples -------------------------------------------------------
+
+leukemia <- read.csv(file = "https://raw.githubusercontent.com/tylerlewiscook/UCO-Data-Mining-Stat-Learning/refs/heads/main/Data/leukemia.csv", stringsAsFactors = TRUE)
+
+# knn loocv manually
+library(class)
+set.seed(4)
+
+n <- dim(leukemia)[1]
+out3 <- NULL
+out5 <- NULL
+out7 <- NULL
+
+for(i in 1:n){
+  out3[i] <- knn(leukemia[-i, 1:10], leukemia[i,1:10], leukemia[-i, 11], k = 3)
+  out5[i] <- knn(leukemia[-i, 1:10], leukemia[i,1:10], leukemia[-i, 11], k = 5)
+  out7[i] <- knn(leukemia[-i, 1:10], leukemia[i,1:10], leukemia[-i, 11], k = 7)
+}
+
+pred3 <- ifelse(out3 == 1, "ALL", "AML")
+pred5 <- ifelse(out5 == 1, "ALL", "AML")
+pred7 <- ifelse(out7 == 1, "ALL", "AML")
+
+table(leukemia$tumor, pred3)
+sum(leukemia$tumor == pred3)/n
+
+table(leukemia$tumor, pred5)
+sum(leukemia$tumor == pred5)/n
+
+table(leukemia$tumor, pred7)
+sum(leukemia$tumor == pred7)/n
+
+
+# knn loocv using caret
+library(caret)
+
+trControl <- trainControl(method = "LOOCV")
+fit <- train(tumor ~ .,
+             method = "knn",
+             tuneGrid = expand.grid(k = c(3, 5, 7)),
+             trControl = trControl,
+             metric = "Accuracy",
+             data = leukemia)
+
+fit
