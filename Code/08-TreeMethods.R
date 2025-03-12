@@ -28,7 +28,7 @@ plot(cvTree$size, cvTree$dev, type = "b")
 which(cvTree$dev == min(cvTree$dev))
 cvTree$size[1]
 
-prunedTree <- prune.tree(fitTree, best = 8)
+prunedTree <- prune.tree(fitTree, best = 8, method = "deviance")
 plot(prunedTree)
 text(prunedTree, cex = 0.7)
 
@@ -41,12 +41,13 @@ library(randomForest)
 bag1 <- randomForest(quality ~ ., data = wine, mtry = 10, importance = TRUE, 
                      subset = train)
 bag1
+plot(bag1)
 predbag1 <- predict(bag1, testWine)
 mean((testWine$quality - predbag1)^2)
 
 bag2 <- randomForest(quality ~ ., data = wine, mtry = 10, importance = TRUE, 
                      subset = train, ntree = 100)
-bag2
+plot(bag2)
 predbag2 <- predict(bag2, testWine)
 mean((testWine$quality - predbag2)^2)
 
