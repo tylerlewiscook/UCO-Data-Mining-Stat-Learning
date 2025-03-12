@@ -28,7 +28,7 @@ plot(cvTree$size, cvTree$dev, type = "b")
 which(cvTree$dev == min(cvTree$dev))
 cvTree$size[1]
 
-prunedTree <- prune.tree(fitTree, best = 10)
+prunedTree <- prune.tree(fitTree, best = 8)
 plot(prunedTree)
 text(prunedTree, cex = 0.7)
 
@@ -50,7 +50,7 @@ bag2
 predbag2 <- predict(bag2, testWine)
 mean((testWine$quality - predbag2)^2)
 
-rf1 <- randomForest(quality ~ ., data = wine, mtry = 3, importance = TRUE, 
+rf1 <- randomForest(quality ~ ., data = wine, importance = TRUE, 
                     subset = train)
 rf1
 plot(rf1)
@@ -72,7 +72,7 @@ library(gbm)
 set.seed(54321)
 
 boost1 <- gbm(quality ~ ., data = trainWine, distribution = "gaussian", 
-              n.trees = 1000, interaction.depth = 4)
+              cv.folds = 5)
 summary(boost1)
 plot(boost1, i = "alcohol")
 gbm.perf(boost1)
@@ -80,19 +80,12 @@ predBoost1 <- predict(boost1, testWine)
 mean((testWine$quality - predBoost1)^2)
 
 boost2 <- gbm(quality ~ ., data = trainWine, distribution = "gaussian", 
-              interaction.depth = 4, cv.folds = 10)
+              interaction.depth = 2, shrinkage = 0.2, n.trees = 500, cv.folds = 5)
 summary(boost2)
-gbm.perf(boost2, method = "cv")
-best.iter2 <- gbm.perf(boost2)
-predBoost2 <- predict(boost2, testWine, n.trees = best.iter2)
+gbm.perf(boost2)
+best.iter <- gbm.perf(boost2)
+predBoost2 <- predict(boost2, testWine, n.trees = best.iter)
 mean((testWine$quality - predBoost2)^2)
-
-boost3 <- gbm(quality ~ ., data = trainWine, distribution = "gaussian", 
-              interaction.depth = 4, shrinkage = 0.5, cv.folds = 10)
-summary(boost3)
-best.iter3 <- gbm.perf(boost3, method = "cv")
-predBoost3 <- predict(boost3, testWine, n.trees = best.iter3)
-mean((testWine$quality - predBoost3)^2)
 
 
 
