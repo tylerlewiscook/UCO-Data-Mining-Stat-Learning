@@ -40,7 +40,7 @@ modnn %>% compile(loss = "mse",
 history <- modnn %>% fit(
   x[train, ], 
   y[train], 
-  epochs = 100, 
+  epochs = 10, 
   batch_size = 100
 )
 
@@ -68,7 +68,7 @@ history <- modnn2 %>%
   fit(
     x[train, ],
     y[train],
-    epochs = 50,
+    epochs = 10,
     batch_size = 50,
     validation_data = list(x[-train, ], y[-train])
   )
@@ -98,11 +98,11 @@ g_test <- mnist$test$y
 dim(x_train)
 dim(x_test)
 
-displayDigit(x_train[1, ])
+displayDigit(t(x_train[1, , ]))
 g_train[1]
-displayDigit(x_train[2, ])
+displayDigit(t(x_train[2, , ]))
 g_train[2]
-displayDigit(x_test[1,])
+displayDigit(t(x_test[1, , ]))
 g_test[1]
 
 x_train <- array_reshape(x_train, c(nrow(x_train), 784))
@@ -130,7 +130,7 @@ modelnn %>% compile(loss = "categorical_crossentropy",
 history <- modelnn %>%
   fit(x_train, 
       y_train, 
-      epochs = 30, 
+      epochs = 10, 
       batch_size = 128,
       validation_split = 0.2
   )
@@ -143,7 +143,7 @@ modelnn %>% predict(x_test) %>% k_argmax() %>% accuracy(g_test)
 # What if we want to make a confusion matrix?
 pred.mnist <- predict(modelnn, x_test)
 dim(pred.mnist)
-head(pred.mninst)
+head(pred.mnist)
 head(y_test)
 new.pred.mnist <- apply(pred.mnist, 1, which.max)
 pred.digit <- new.pred.mnist - 1
